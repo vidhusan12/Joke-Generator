@@ -39,6 +39,12 @@ const getRandomJokes = () => {
   return randomJoke;
 }
 
-// Call the function multiple times to test
-getRandomJokes(); // Test function call
+const jokeDisplay = document.getElementById("jokeDisplay");
+const tellJokeButton = document.getElementById("tellJokeButton");
+
+//event listener for the button
+tellJokeButton.addEventListener("click", () => {
+  const randomJoke = getRandomJokes();
+  jokeDisplay.innerText = randomJoke;
+})
 

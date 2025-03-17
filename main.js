@@ -7,17 +7,38 @@ const jokes = [
   "Why did the scarecrow win an award? Because he was outstanding in his field!"
 ];
 
-// function that shuffle jokes
+let jokeTrack = [];
+let shuffledJokes = [];
+
+// Function to shuffle jokes
 const shuffleArray = (arr) => {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    //swap Elements
     [arr[i], arr[j]] = [arr[j], arr[i]];
-
   }
   return arr;
 }
 
+// Function to get random jokes
+const getRandomJokes = () => {
+  // Initialize shuffledJokes if it is empty
+  if (shuffledJokes.length === 0) {
+    shuffledJokes = shuffleArray([...jokes]); // Shuffle a fresh copy of jokes
+  }
 
-console.log(shuffleArray(jokes));
-//console.log(jokes);
+  // If all jokes have been used, reset and reshuffle
+  if (jokeTrack.length === jokes.length) {
+    jokeTrack = []; // Clear jokeTrack
+    shuffledJokes = shuffleArray([...jokes]); // Reshuffle a fresh copy of jokes
+  }
+
+  const randomJoke = shuffledJokes.pop(); // Pop the last joke from shuffledJokes
+  jokeTrack.push(randomJoke); // Add it to jokeTrack
+
+  console.log(randomJoke); // Output the random joke
+  return randomJoke;
+}
+
+// Call the function multiple times to test
+getRandomJokes(); // Test function call
+
